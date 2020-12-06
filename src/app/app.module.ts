@@ -19,14 +19,26 @@ import { RenduDirective } from './shared/rendu.directive';
 import { FormsModule } from '@angular/forms';
 import { AssignmentDetailComponent } from './assignments/assignment-detail/assignment-detail.component';
 import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component';
+import {RouterModule, Routes} from '@angular/router';
+import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
+import {AuthGuard} from "./shared/auth.guard";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
+const routes:Routes = [
+  {path:'',component:AssignmentsComponent},
+  {path:'home', component:AssignmentsComponent},
+  {path:'add', component:AddAssignmentComponent},
+  {path:'assignment/:id', component:AssignmentDetailComponent},
+  {path:'assignment/:id/edit', component:EditAssignmentComponent, canActivate: [AuthGuard]}
+];
 @NgModule({
   declarations: [
     AppComponent,
     AssignmentsComponent,
     RenduDirective,
     AssignmentDetailComponent,
-    AddAssignmentComponent
+    AddAssignmentComponent,
+    EditAssignmentComponent
   ],
   imports: [
     BrowserModule,
@@ -35,8 +47,9 @@ import { AddAssignmentComponent } from './assignments/add-assignment/add-assignm
     MatInputModule, MatFormFieldModule,
     MatDatepickerModule, MatNativeDateModule,
     MatListModule,MatCardModule,
-    MatCheckboxModule,
-    FormsModule
+    MatCheckboxModule, MatSlideToggleModule,
+    FormsModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
