@@ -9,7 +9,7 @@
       <button mat-flat-button color="primary" [disabled]="!isAdmin()" (click)="onClickEdit()">
         EDIT
       </button>
-      <button mat-flat-button color="warn" (click)="onDelete()">
+      <button mat-flat-button color="warn" [disabled]="!isAdmin()" (click)="onDelete()">
         DELETE
       </button>
     </div>

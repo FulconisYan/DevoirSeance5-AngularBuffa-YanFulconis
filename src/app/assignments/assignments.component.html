@@ -1,8 +1,8 @@
 <main class="container">
-  <div *ngIf="isAdmin()">
+  <div *ngIf="isAdmin() || isLogged()">
   <br/>
   <nav><a routerLink="/add">
-  <button mat-flat-button class="ajouterBtn"
+  <button *ngIf="isAdmin()" mat-flat-button class="ajouterBtn"
           color="accent">
     Ajouter un devoir
   </button>

@@ -1,7 +1,7 @@
 <h1><a routerLink="/home/{{username}}"> {{titre}}</a></h1>
-<button mat-flat-button color="primary" [disabled]="isAdmin()" (click)=openDialog() class="dialogBtn"> Connexion </button>
-<button mat-flat-button color="primary" class="deconBtn"> Deconnexion </button>
-<p *ngIf="isAdmin()"> Vous êtes connecté en tant que {{username}} </p>
+<button mat-flat-button color="primary" [disabled]="isAdmin() || isLogged()" (click)=openDialog() class="dialogBtn"> Connexion </button>
+<button mat-flat-button color="primary" [disabled]="!isAdmin() && !isLogged()"(click)=deconnexion() class="deconBtn"> Deconnexion </button>
+<p *ngIf="isAdmin() || isLogged()"> Vous êtes connecté en tant que {{username}} </p>
 <router-outlet></router-outlet>
 
 

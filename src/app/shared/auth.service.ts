@@ -7,7 +7,8 @@ import {Observable, of} from "rxjs";
   providedIn: 'root'
 })
 export class AuthService {
-  loggedIn=false;
+  loggedInAdmin=false;
+  loggedInUser=false;
   username:string;
   constructor() {}
 
@@ -34,19 +35,31 @@ export class AuthService {
     },
   ];
 
-  logIn(){
-    this.loggedIn = true;
+  logInAdmin(){
+    this.loggedInAdmin = true;
+  }
+
+  logInUser(){
+    this.loggedInUser = true;
   }
 
   logOut(){
-    this.loggedIn = false;
+    this.loggedInAdmin = false;
+    this.loggedInUser = false;
   }
 
   verifUser(profil:Profile)
   {
     this.profils.forEach((p, index) => {
       if(p.login === profil.login && p.password === profil.password) {
-        this.logIn();
+        if (p.role == 1)
+        {
+            this.logInAdmin();
+        }
+        else
+        {
+            this.logInUser()
+        }
         this.username = p.login;
         console.log("critères valides");
         //this.assignments[index] = assignment;
@@ -58,7 +71,7 @@ export class AuthService {
   isAdmin(){
     const isUserAdmin = new Promise(
       (resolve,reject) => {
-        resolve(this.loggedIn);
+        resolve(this.loggedInAdmin);
       }
     );
 
@@ -68,7 +81,7 @@ export class AuthService {
   isLogged(){
     const isUserLogged = new Promise(
       (resolve,reject) => {
-        resolve(this.loggedIn);
+        resolve(this.loggedInUser);
       }
     );
 

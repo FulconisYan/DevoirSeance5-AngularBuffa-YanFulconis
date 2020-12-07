@@ -28,7 +28,11 @@ export class AssignmentsComponent implements OnInit {
   }
 
   isAdmin(){
-    return this.authService.loggedIn;
+    return this.authService.loggedInAdmin;
+  }
+
+  isLogged(){
+    return this.authService.loggedInUser;
   }
 
 

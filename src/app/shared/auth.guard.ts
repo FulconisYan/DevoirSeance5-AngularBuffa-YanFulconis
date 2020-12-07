@@ -24,9 +24,16 @@ export class AuthGuard implements CanActivate {
           return false;
         }
     });
+
     return this.authService.isLogged()
       .then((authentifie:Boolean) => {
-        return true;
+        if (authentifie) {
+          return true;
+        } else {
+          // avant d'interdire la navigation, on renvoie aussi vers la page d'accueil
+          this.router.navigate(['/home'])
+          return false;
+        }
       });
   }
 

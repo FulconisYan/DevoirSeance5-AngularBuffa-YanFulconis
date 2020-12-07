@@ -19,14 +19,14 @@ export class AppComponent {
               public dialog:MatDialog) {}
 
   login(){
-    if (this.authService.loggedIn){
+    if (this.authService.loggedInAdmin || this.authService.loggedInUser){
       console.log("logOut")
       this.authService.logOut();
       this.router.navigate(['home']);
     }
     else {
       console.log("logIn")
-      this.authService.logIn();
+      this.authService.logInAdmin();
     }
   }
 
@@ -44,7 +44,18 @@ export class AppComponent {
   }
 
   isAdmin(){
-    return this.authService.loggedIn;
+    return this.authService.loggedInAdmin;
+  }
+
+  isLogged(){
+    return this.authService.loggedInUser;
+  }
+
+
+  deconnexion()
+  {
+    this.router.navigate(['home'])
+    this.authService.logOut();
   }
 
 
