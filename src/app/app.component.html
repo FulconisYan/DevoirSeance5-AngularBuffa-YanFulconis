@@ -1,6 +1,7 @@
-<h1><a routerLink="/home"> {{titre}}</a></h1>
-<mat-slide-toggle color="primary" (click)="login()">Login</mat-slide-toggle>
-<button mat-flat-button color="primary" style="margin-left: 20px"> Connexion </button>
+<h1><a routerLink="/home/{{username}}"> {{titre}}</a></h1>
+<button mat-flat-button color="primary" [disabled]="isAdmin()" (click)=openDialog() class="dialogBtn"> Connexion </button>
+<button mat-flat-button color="primary" class="deconBtn"> Deconnexion </button>
+<p *ngIf="isAdmin()"> Vous êtes connecté en tant que {{username}} </p>
 <router-outlet></router-outlet>
 
 

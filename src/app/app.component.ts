@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import {AuthService} from "./shared/auth.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {DialogAssignmentComponent} from "./assignments/dialog-assignment/dialog-assignment.component";
+
 
 @Component({
   selector: 'app-root',
@@ -9,7 +12,11 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
   titre = 'Application de gestion des devoirs (Assignments)';
-  constructor(private authService:AuthService,private router:Router) {}
+  username:string
+  constructor(private authService:AuthService,
+              private router:Router,
+              private route:ActivatedRoute,
+              public dialog:MatDialog) {}
 
   login(){
     if (this.authService.loggedIn){
@@ -22,4 +29,23 @@ export class AppComponent {
       this.authService.logIn();
     }
   }
+
+  openDialog():void
+  {
+    const dialogRef = this.dialog.open(DialogAssignmentComponent, { width:'300px'});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (this.route.snapshot.params.login != "") {
+        this.username = this.authService.username;
+
+      }
+      console.log('The dialog was closed');
+    });
+  }
+
+  isAdmin(){
+    return this.authService.loggedIn;
+  }
+
+
 }

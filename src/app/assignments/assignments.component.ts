@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AssignmentsService } from '../shared/assignments.service';
 import {Assignment} from './assignment.model';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {DialogAssignmentComponent} from "./dialog-assignment/dialog-assignment.component";
+import {AuthService} from "../shared/auth.service";
 
 @Component({
   selector: 'app-assignments',
@@ -10,7 +13,7 @@ import {Assignment} from './assignment.model';
 export class AssignmentsComponent implements OnInit {
   assignments:Assignment[];
 
-  constructor(private assignmentService:AssignmentsService) { }
+  constructor(private assignmentService:AssignmentsService, private authService:AuthService) { }
 
   ngOnInit(): void {
     //this.assignments = this.assignmentService.getAssignments();
@@ -23,6 +26,11 @@ export class AssignmentsComponent implements OnInit {
         this.assignments = assignments
       });
   }
+
+  isAdmin(){
+    return this.authService.loggedIn;
+  }
+
 
   /*
   onAddAssignmentBtnClick() {

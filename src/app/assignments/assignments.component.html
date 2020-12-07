@@ -1,4 +1,5 @@
 <main class="container">
+  <div *ngIf="isAdmin()">
   <br/>
   <nav><a routerLink="/add">
   <button mat-flat-button class="ajouterBtn"
@@ -21,4 +22,5 @@
     </mat-list-item>
     </a></nav>
   </mat-list>
+</div>
 </main>

@@ -1,0 +1,13 @@
+<h1 mat-dialog-title> Connexion à un compte</h1>
+<div mat-dialog-content class="mat-dialog-content">
+  <p>Login</p>
+  <input matInput [(ngModel)]="login" placeholder="Nom d'Utilisateur" name="nom">
+  <p>Password</p>
+  <input matInput [(ngModel)]="password" placeholder="Mot de passe" name="password">
+</div>
+<div mat-dialog-actions class="mat-dialog-actions">
+
+  <button mat-button (click)="onValidClick($event)">Valider</button>
+  <button mat-button (click)="onNoClick()">Annuler</button>
+
+</div>

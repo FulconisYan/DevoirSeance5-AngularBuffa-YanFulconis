@@ -23,14 +23,19 @@ import {RouterModule, Routes} from '@angular/router';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
 import {AuthGuard} from "./shared/auth.guard";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatDialogModule} from "@angular/material/dialog";
+import { DialogAssignmentComponent } from './assignments/dialog-assignment/dialog-assignment.component';
+import { DialogAuthComponent } from './auth/dialog-auth/dialog-auth.component';
 
 const routes:Routes = [
   {path:'',component:AssignmentsComponent},
   {path:'home', component:AssignmentsComponent},
+  {path:'home/:login', component:AssignmentsComponent},
   {path:'add', component:AddAssignmentComponent},
   {path:'assignment/:id', component:AssignmentDetailComponent},
-  {path:'assignment/:id/edit', component:EditAssignmentComponent, canActivate: [AuthGuard]}
+  {path:'assignment/:id/edit', component:EditAssignmentComponent, canActivate: [AuthGuard]},
 ];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +43,9 @@ const routes:Routes = [
     RenduDirective,
     AssignmentDetailComponent,
     AddAssignmentComponent,
-    EditAssignmentComponent
+    EditAssignmentComponent,
+    DialogAssignmentComponent,
+    DialogAuthComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,7 @@ const routes:Routes = [
     MatIconModule, MatDividerModule,
     MatInputModule, MatFormFieldModule,
     MatDatepickerModule, MatNativeDateModule,
-    MatListModule,MatCardModule,
+    MatListModule,MatCardModule, MatDialogModule,
     MatCheckboxModule, MatSlideToggleModule,
     FormsModule,
     RouterModule.forRoot(routes)
